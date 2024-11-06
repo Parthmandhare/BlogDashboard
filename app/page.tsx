@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Cards from "./Components/Cards";
-import Filter from "./Components/Filter";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 
 
 export default function Home() {
