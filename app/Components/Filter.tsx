@@ -1,52 +1,29 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import Cards from "./Components/Cards";
-import Filter from "./Components/Filter";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React from 'react'
 
+import { useState } from 'react';
+// import { FaCaretDown } from 'react-icons/fa';
 
-export default function Home() {
-  const [posts, setPosts] = useState([]);
+const Filter = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedLanguage, setSelectedLanguage] = useState('Filter');
 
-  useEffect(() => {
-    // axios.get("https://jsonplaceholder.typicode.com/posts")
-    //   .then(async(res) => {
-    //     setPosts(res.data);
-    //     console.log(posts);
-        
-    //   });
+    const languages = ['DSA Self Placed', 'JavaScript',
+                       'Python', 'Java', 'C++', 'Ruby',
+                       'Go', 'TypeScript'];
 
-  fetch('https://jsonplaceholder.typicode.com/posts')
-  .then((response) => response.json())
-  .then((json) => {console.log(json); setPosts(json)});
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
 
-  
-  }, []);
+    const handleSelect = (language: string) => {
+        setSelectedLanguage(language);
+        setIsOpen(false);
+    };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('Filter');
-
-  const languages = ['Parth', 'Prasad', 'Shreerang', 'Gargi'];
-
-  const toggleDropdown = () => {
-      setIsOpen(!isOpen);
-  };
-
-  const handleSelect = (language: string) => {
-      setSelectedLanguage(language);
-      setIsOpen(false);
-  };
-
-
-  return (
-    <>
-      <div className="mx-5 flex flex-col gap-2 ">
-        <div className="flex flex-row justify-between ">
-          <div>Recent Blogs</div>
-          <div>
-          <div className="flex justify-center">
+    return (
+        <div className="flex justify-center">
             <div className="relative inline-block text-left">
                 {/* Dropdown button */}
                 <button
@@ -85,17 +62,8 @@ export default function Home() {
                 )}
             </div>
         </div>
-          </div>
-        </div>
+    );
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
-          {posts && posts.map((post) => (
-            <Cards mypost={post} />
-          ))}
-        </div>
-      </div>
-
-      {/* <button onClick={() => {console.log(posts)}}>click</button> */}
-    </>
-  );
 }
+
+export default Filter
